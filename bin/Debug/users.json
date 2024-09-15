@@ -1,0 +1,11 @@
+{
+  "ADMIN": {
+    "username": "ADMIN",
+    "password": "",
+    "certificate_path": "C:\\Users\\mega-\\Desktop\\Certificate File.txt",
+    "has_certificate": false,
+    "is_locked": false,
+    "role": "admin",
+    "min_password_length": 8
+  }
+}
