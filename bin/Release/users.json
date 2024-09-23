@@ -7,14 +7,5 @@
     "is_locked": false,
     "role": "admin",
     "min_password_length": 8
-  },
-  "KATANA": {
-    "username": "KATANA",
-    "password": "ZXCZXCZXC",
-    "certificate_path": null,
-    "has_certificate": false,
-    "is_locked": false,
-    "role": "user",
-    "min_password_length": 8
   }
 }

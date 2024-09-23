@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using Newtonsoft.Json;
 
@@ -62,12 +63,24 @@ namespace _1lb
             else throw new Exception($"Пользователь {username} не существует");
         }
 
-        // Метод для изменения пароля пользователя
         public static void ChangePassword(string newPassword)
         {
-            if (newPassword.Length > Info[Current].min_password_length) Info[Current].password = newPassword;
-            else throw new Exception($"Пароль не подходит по минимальной длинне.");
+            if (newPassword.Length < Info[Current].min_password_length)
+                throw new Exception($"Пароль не подходит по минимальной длине.");
 
+            // Проверка на наличие строчных и прописных букв
+            if (!newPassword.Any(char.IsLower) || !newPassword.Any(char.IsUpper))
+                throw new Exception("Пароль должен содержать как строчные, так и прописные буквы.");
+
+            // Проверка на наличие цифр и знаков препинания
+            if (!newPassword.Any(char.IsDigit) || !Regex.IsMatch(newPassword, @"[^\w\s]"))
+                throw new Exception("Пароль должен содержать хотя бы одну цифру и один знак препинания.");
+
+            // Проверка на отсутствие повторяющихся символов
+            if (newPassword.GroupBy(c => c).Any(g => g.Count() > 1))
+                throw new Exception("Пароль не должен содержать повторяющихся символов.");
+
+            Info[Current].password = newPassword;
         }
 
         // Метод для установки файла сертификата
@@ -101,7 +114,6 @@ namespace _1lb
         {
             if (Info.ContainsKey(username)) Info[username].min_password_length = length;
             else throw new Exception($"Пользователь {username} не существует");
-
         }
 
         // Метод выхода

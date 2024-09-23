@@ -16,11 +16,15 @@ namespace _1lb
     public partial class MainWindow
     {
         public static string CurrentDirectory = Directory.GetCurrentDirectory();
+        private int count;
+
         public MainWindow()
         {
             InitializeComponent();
+            count = 0;
             string jsonFileWithUsers;
-
+            
+            
             var FileWithUsers =
                 Directory.GetFiles(CurrentDirectory).FirstOrDefault(file => file.Contains("users.json"));
             if (FileWithUsers == null)
@@ -49,7 +53,7 @@ namespace _1lb
                 User.Info = JsonConvert.DeserializeObject<Dictionary<string, User>>(jsonFileWithUsers);
             }
         }
-        
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             if (User.Info.ContainsKey(UsernameBox.Text))
@@ -58,19 +62,25 @@ namespace _1lb
                 {
                     if (PasswordBox.Password == User.Info[UsernameBox.Text].password)
                     {
-                        if (User.Info[UsernameBox.Text].is_locked)
-                        {
-                            MessageBox.Show("Пользователь заблокирован.", "Ошибка аутентификации", MessageBoxButton.OK);
-                        }
+                        if (User.Info[UsernameBox.Text].is_locked) MessageBox.Show("Пользователь заблокирован.");
                         else
                         {
                             Menu menu = new Menu(UsernameBox.Text);
                             menu.Show();
+                         
+                            string filePath = $"{User.Current}_computer_signature.txt";
+                            ComputerSignature.WriteComputerSignature(CurrentDirectory + "\\" + filePath);
+                            
                             Close();
                         }
                     }
                     else
+                    {
                         MessageBox.Show("Не правильный логин или пароль.");
+                        count++;
+                    }
+                    if (count == 3)
+                        Close();
                 }
                 else
                 {
@@ -81,9 +91,17 @@ namespace _1lb
                             string fileInfo = File.ReadAllText(User.Info[UsernameBox.Text].certificate_path);
                             if (fileInfo == UsernameBox.Text)
                             {
-                                Menu menu = new Menu(UsernameBox.Text);
-                                menu.Show();
-                                Close();
+                                if (User.Info[UsernameBox.Text].is_locked) MessageBox.Show("Пользователь заблокирован.");
+                                else
+                                {
+                                    Menu menu = new Menu(UsernameBox.Text);
+                                    menu.Show();
+                                    
+                                    string filePath = $"{User.Current}_computer_signature.txt";
+                                    ComputerSignature.WriteComputerSignature(CurrentDirectory + "\\" + filePath);
+                                    
+                                    Close();
+                                }
                             }
                             else MessageBox.Show("Информация в сертификате не соответствует ожидаемому значению.");
                         } 
