@@ -58,6 +58,9 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="AboutApp.xaml.cs">
+          <DependentUpon>AboutApp.xaml</DependentUpon>
+        </Compile>
         <Compile Include="AddUser.xaml.cs">
           <DependentUpon>AddUser.xaml</DependentUpon>
         </Compile>
@@ -78,6 +81,7 @@
         <Compile Include="UsersWindow.xaml.cs">
           <DependentUpon>UsersWindow.xaml</DependentUpon>
         </Compile>
+        <Page Include="AboutApp.xaml" />
         <Page Include="AddUser.xaml" />
         <Page Include="CertificateWindow.xaml" />
         <Page Include="ChangePassword.xaml" />

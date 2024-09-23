@@ -170,5 +170,11 @@ namespace _1lb
             // Запускаем анимацию
             storyboard.Begin();
         }
+
+        private void UIElement_OnMouseDown(object sender, MouseEventArgs e)
+        {
+            AboutApp aboutApp = new AboutApp();
+            aboutApp.ShowDialog();
+        }
     }
 }

@@ -1,0 +1,39 @@
+﻿<Window x:Class="_1lb.AboutApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="О программе" Height="270" Width="340" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" /> <!-- Для кнопки ОК -->
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" FontSize="14" Text="DoSforUserAD v1.0.0 для Windows"
+                   HorizontalAlignment="Center" Margin="0,10,0,10" />
+
+        <GroupBox Grid.Row="1" Header="Информация о лицензии" Margin="0,0,0,10">
+            <TextBlock Text="Эта программа бесплатна" Padding="10" />
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Header="Информация об авторе">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Автор: " Padding="10,10,0,0" />
+                    <TextBlock Text="Полховский Владимир Сергеевич" Padding="10,10,0,0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Сайт: " Padding="10,10,0,0" />
+                    <TextBlock Foreground="Blue" Padding="10,10,0,0" Text="https://github.com/Rukati" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <TextBlock Grid.Row="3" FontSize="10" Text="© 2024 ИСБ-121. Все права защищены."
+                   HorizontalAlignment="Center" Margin="0,10,0,10" />
+
+        <Button Grid.Row="4" Content="OK" Width="80" Height="30" HorizontalAlignment="Center" Click="OkButton_Click" />
+    </Grid>
+</Window>
